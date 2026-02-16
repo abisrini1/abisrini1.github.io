@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abinaya Srinivasan | Portfolio</title>
+  <meta name="description" content="Abinaya Srinivasan — M.S.E. ECE @ Johns Hopkins | Computer Vision & Medical Imaging" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #0b0f19;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    a { color: #60a5fa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: min(900px, 92vw); margin: 0 auto; padding: 32px 0; }
+    header { border-bottom: 1px solid #1f2937; padding-bottom: 24px; }
+    h1 { font-size: 40px; margin-bottom: 8px; }
+    .subtitle { color: #9ca3af; margin-bottom: 12px; }
+
+    .links { color: #9ca3af; }
+    .links span { margin: 0 6px; }
+
+    section { padding: 28px 0; border-bottom: 1px solid #1f2937; }
+    h2 { margin-bottom: 12px; }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .footer { color: #9ca3af; text-align: center; padding: 24px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Abinaya Srinivasan</h1>
+      <p class="subtitle">M.S.E. Electrical & Computer Engineering @ Johns Hopkins • Computer Vision • Medical Imaging</p>
+      <p class="links">
+        <a href="mailto:abinaya2srinivasan@gmail.com">abinaya2srinivasan@gmail.com</a>
+        <span>•</span>
+        <a href="https://github.com/abisrini1" target="_blank">GitHub</a>
+        <span>•</span>
+        <a href="#" target="_blank">LinkedIn</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>About</h2>
+      <p>
+        I’m a graduate student at Johns Hopkins University pursuing an M.S.E. in Electrical and Computer Engineering,
+        focused on computer vision, medical imaging, and machine learning. I work on research projects in CT denoising,
+        medical image segmentation, and generative models for healthcare applications.
+      </p>
+    </section>
+
+    <section>
+      <h2>Projects & Research</h2>
+
+      <div class="card">
+        <h3>Low-Dose CT Denoising with Plug-and-Play + VAE Prior</h3>
+        <p>
+          Built a lightweight VAE and integrated it into a Plug-and-Play optimization framework for low-dose CT denoising.
+          Evaluated against TV baselines with simulated Poisson–Gaussian noise.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>3D Circle of Willis Segmentation from MRA</h3>
+        <p>
+          Working on 3D vascular segmentation of the Circle of Willis from MRA volumes using deep learning and
+          representation learning techniques.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Chest X-ray Augmentation using GANs and VAEs</h3>
+        <p>
+          Compared CVAE and cGAN-based augmentation for imbalanced chest X-ray classification and evaluated synthetic
+          image quality and downstream performance.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Publications</h2>
+      <ul>
+        <li>Graph-theoretic characterization of nuclear spatial organization in renal cell carcinoma images (CMPB, 2025)</li>
+        <li>Multifractal Analysis of H&E Stained Nuclear Images for RCC (EMBC, 2025)</li>
+        <li>Glitch Waveforms Classification with Swin Transformer (ICMISC)</li>
+        <li>GAN-based Segmentation for Acute Lymphoblastic Leukemia Detection (AIIII, ICBSII)</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Abinaya Srinivasan</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
