@@ -5,107 +5,472 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Abinaya Srinivasan | Portfolio</title>
   <meta name="description" content="Abinaya Srinivasan — M.S.E. ECE @ Johns Hopkins | Computer Vision & Medical Imaging" />
+
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0f19;
-      color: #e5e7eb;
-      line-height: 1.6;
+    :root{
+      --bg:#0b0f19; --panel:#0f172a; --card:#111827; --line:#1f2937;
+      --text:#e5e7eb; --muted:#9ca3af; --accent:#60a5fa;
     }
-    a { color: #60a5fa; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(980px,92vw);margin:0 auto}
+    .header{padding:30px 0 18px;border-bottom:1px solid var(--line)}
+    h1{margin:0 0 6px;font-size:40px;letter-spacing:-.5px}
+    .subtitle{margin:0 0 12px;color:var(--muted)}
+    .links{display:flex;flex-wrap:wrap;gap:10px;align-items:center;color:var(--muted)}
+    .links .dot{color:var(--line)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid var(--line);color:var(--text);background:transparent}
+    .btn.primary{background:linear-gradient(135deg,rgba(96,165,250,.22),rgba(96,165,250,.08));border-color:rgba(96,165,250,.35)}
+    .nav{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .nav a{color:var(--muted);padding:6px 10px;border-radius:10px;border:1px solid transparent}
+    .nav a:hover{border-color:var(--line);color:var(--text);text-decoration:none}
 
-    .container { width: min(900px, 92vw); margin: 0 auto; padding: 32px 0; }
-    header { border-bottom: 1px solid #1f2937; padding-bottom: 24px; }
-    h1 { font-size: 40px; margin-bottom: 8px; }
-    .subtitle { color: #9ca3af; margin-bottom: 12px; }
-
-    .links { color: #9ca3af; }
-    .links span { margin: 0 6px; }
-
-    section { padding: 28px 0; border-bottom: 1px solid #1f2937; }
-    h2 { margin-bottom: 12px; }
-
-    .card {
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
+    /* hero */
+    .hero{
+      margin:22px 0 0;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:radial-gradient(1200px 400px at 20% 0%, rgba(96,165,250,.18), transparent 55%),
+                 radial-gradient(800px 400px at 80% 20%, rgba(99,102,241,.14), transparent 55%),
+                 rgba(17,24,39,.55);
+      overflow:hidden;
+      position:relative;
+      min-height:280px;
+    }
+    #nnCanvas{width:100%;height:280px;display:block}
+    .heroOverlay{
+      position:absolute; inset:0;
+      display:flex; align-items:flex-end;
+      padding:18px;
+      pointer-events:none;
+    }
+    .heroNote{
+      max-width:680px;
+      color:var(--muted);
+      font-size:13px;
+      background:rgba(2,6,23,.35);
+      border:1px solid rgba(31,41,55,.8);
+      padding:10px 12px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
     }
 
-    .footer { color: #9ca3af; text-align: center; padding: 24px 0; }
+    /* sections */
+    .section{padding:26px 0;border-bottom:1px solid var(--line)}
+    h2{margin:0 0 14px;font-size:22px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .card{
+      grid-column:span 12;
+      background:rgba(17,24,39,.7);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+    @media (min-width: 820px){
+      .card.half{grid-column:span 6}
+    }
+    .meta{margin:6px 0 0;color:var(--muted);font-size:13px}
+    .titleRow{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;align-items:flex-start}
+    .bullets{margin:10px 0 0;padding-left:18px}
+    .bullets li{margin:8px 0}
+    .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .pill{border:1px solid var(--line);background:rgba(96,165,250,.08);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--text)}
+    .pub{margin:10px 0}
+    .pubTitle{font-weight:600}
+    .pubLinks{margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .footer{padding:22px 0 38px;color:var(--muted);text-align:center}
+    .dim{color:var(--muted)}
+    code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:8px}
   </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Abinaya Srinivasan</h1>
-      <p class="subtitle">M.S.E. Electrical & Computer Engineering @ Johns Hopkins • Computer Vision • Medical Imaging</p>
-      <p class="links">
-        <a href="mailto:abinaya2srinivasan@gmail.com">abinaya2srinivasan@gmail.com</a>
-        <span>•</span>
-        <a href="https://github.com/abisrini1" target="_blank">GitHub</a>
-        <span>•</span>
-        <a href="#" target="_blank">LinkedIn</a>
-      </p>
-    </header>
 
-    <section>
+<body>
+  <header class="container header">
+    <h1>Abinaya Srinivasan</h1>
+    <p class="subtitle">M.S.E. Electrical & Computer Engineering @ Johns Hopkins • Computer Vision • Medical Imaging</p>
+
+    <div class="links">
+      <a href="mailto:abinaya2srinivasan@gmail.com">abinaya2srinivasan@gmail.com</a>
+      <span class="dot">•</span>
+      <a href="https://github.com/abisrini1" target="_blank" rel="noopener">GitHub</a>
+      <span class="dot">•</span>
+      <!-- Replace # with your LinkedIn -->
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="dot">•</span>
+      <!-- Upload your CV to assets/Abinaya_Srinivasan_CV.pdf -->
+      <a href="assets/Abinaya_Srinivasan_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="#projects">Projects</a>
+      <a class="btn" href="#publications">Publications</a>
+      <a class="btn" href="#experience">Experience</a>
+    </div>
+
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#posters">Posters</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+    </nav>
+
+    <!-- fun neural “sphere” -->
+    <div class="hero" aria-label="Interactive neural sphere animation">
+      <canvas id="nnCanvas"></canvas>
+      <div class="heroOverlay">
+        <div class="heroNote">
+          Neural-ish sphere: move your cursor near it ✨ (pure JS + canvas, no libraries)
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about" class="section">
       <h2>About</h2>
       <p>
-        I’m a graduate student at Johns Hopkins University pursuing an M.S.E. in Electrical and Computer Engineering,
-        focused on computer vision, medical imaging, and machine learning. I work on research projects in CT denoising,
-        medical image segmentation, and generative models for healthcare applications.
+        I’m a graduate student focusing on computer vision and medical imaging, with experience spanning computational
+        pathology, generative modeling, and 3D medical image analysis. I care about building practical, reproducible
+        pipelines and research that can translate to real clinical/engineering use.
       </p>
     </section>
 
-    <section>
-      <h2>Projects & Research</h2>
+    <section id="education" class="section">
+      <h2>Education</h2>
+      <div class="grid">
+        <div class="card half">
+          <div class="titleRow">
+            <div>
+              <div style="font-weight:700">Johns Hopkins University</div>
+              <div class="meta">M.S.E., Electrical & Computer Engineering</div>
+            </div>
+            <div class="meta">Baltimore, MD</div>
+          </div>
+          <ul class="bullets">
+            <li>Focus: Computer Vision, Medical Imaging, Machine Learning</li>
+            <li>Coursework: Computational Imaging, Machine Perception, ML for Signal Processing (edit as needed)</li>
+          </ul>
+        </div>
 
-      <div class="card">
-        <h3>Low-Dose CT Denoising with Plug-and-Play + VAE Prior</h3>
-        <p>
-          Built a lightweight VAE and integrated it into a Plug-and-Play optimization framework for low-dose CT denoising.
-          Evaluated against TV baselines with simulated Poisson–Gaussian noise.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>3D Circle of Willis Segmentation from MRA</h3>
-        <p>
-          Working on 3D vascular segmentation of the Circle of Willis from MRA volumes using deep learning and
-          representation learning techniques.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Chest X-ray Augmentation using GANs and VAEs</h3>
-        <p>
-          Compared CVAE and cGAN-based augmentation for imbalanced chest X-ray classification and evaluated synthetic
-          image quality and downstream performance.
-        </p>
+        <div class="card half">
+          <div class="titleRow">
+            <div>
+              <div style="font-weight:700">Your Undergrad University</div>
+              <div class="meta">B.E./B.Tech. (edit) • Electrical/ECE (edit)</div>
+            </div>
+            <div class="meta">Location</div>
+          </div>
+          <ul class="bullets">
+            <li>Add your degree details here</li>
+            <li>Add key coursework / honors (optional)</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section>
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="card half">
+          <div style="font-weight:700">Low-Dose CT Denoising (Plug-and-Play + VAE Prior)</div>
+          <div class="meta">PyTorch • Optimization • Generative Priors</div>
+          <ul class="bullets">
+            <li>Built a lightweight convolutional VAE and used it as an implicit prior in a PnP reconstruction loop.</li>
+            <li>Compared against classical regularizers (e.g., TV) under simulated noise.</li>
+          </ul>
+          <div class="pubLinks">
+            <a href="#" target="_blank" rel="noopener">GitHub</a>
+            <a href="#" target="_blank" rel="noopener">Report</a>
+          </div>
+        </div>
+
+        <div class="card half">
+          <div style="font-weight:700">3D Circle of Willis Segmentation from MRA</div>
+          <div class="meta">3D U-Net style models • Representation Learning • Vascular Analysis</div>
+          <ul class="bullets">
+            <li>Training a 3D segmentation pipeline for cerebral vasculature; planning representation learning on vascular structure.</li>
+            <li>Targets TopCoW/TopBrain style datasets (update links when ready).</li>
+          </ul>
+          <div class="pubLinks">
+            <a href="#" target="_blank" rel="noopener">GitHub</a>
+            <a href="#" target="_blank" rel="noopener">Results</a>
+          </div>
+        </div>
+      </div>
+      <p class="dim" style="margin-top:10px">
+        Tip: Make one GitHub repo per project and paste the links above.
+      </p>
+    </section>
+
+    <section id="publications" class="section">
       <h2>Publications</h2>
-      <ul>
-        <li>Graph-theoretic characterization of nuclear spatial organization in renal cell carcinoma images (CMPB, 2025)</li>
-        <li>Multifractal Analysis of H&E Stained Nuclear Images for RCC (EMBC, 2025)</li>
-        <li>Glitch Waveforms Classification with Swin Transformer (ICMISC)</li>
-        <li>GAN-based Segmentation for Acute Lymphoblastic Leukemia Detection (AIIII, ICBSII)</li>
-      </ul>
+
+      <!-- Replace these links with the hyperlinks from your CV -->
+      <div class="pub">
+        <div class="pubTitle">Graph-theoretic characterization of nuclear spatial organization in renal cell carcinoma images</div>
+        <div class="meta">Computer Methods and Programs in Biomedicine (2025)</div>
+        <div class="pubLinks">
+          <a href="#" target="_blank" rel="noopener">Paper</a>
+          <a href="#" target="_blank" rel="noopener">Code</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pubTitle">Multifractal Analysis of H&E Stained Nuclear Images for Differentiation of Early-Grade Renal Cell Carcinoma</div>
+        <div class="meta">EMBC (2025)</div>
+        <div class="pubLinks">
+          <a href="#" target="_blank" rel="noopener">Paper</a>
+          <a href="#" target="_blank" rel="noopener">Poster</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pubTitle">Glitch Waveforms Classification with Swin Transformer Based on LIGO Data</div>
+        <div class="meta">ICMISC</div>
+        <div class="pubLinks">
+          <a href="#" target="_blank" rel="noopener">Paper</a>
+          <a href="#" target="_blank" rel="noopener">Poster</a>
+        </div>
+      </div>
+
+      <p class="dim" style="margin-top:14px">
+        You’ll replace each <code>#</code> with the actual hyperlink from your CV (DOI, IEEE, Springer, arXiv, etc.).
+      </p>
     </section>
 
-    <footer class="footer">
-      <p>© <span id="year"></span> Abinaya Srinivasan</p>
-    </footer>
-  </div>
+    <section id="posters" class="section">
+      <h2>Posters</h2>
+      <p class="dim">Upload poster PDFs to <code>assets/posters/</code> and link them here.</p>
+      <ul class="bullets">
+        <li><a href="assets/posters/EMBC_2025_poster.pdf" target="_blank" rel="noopener">EMBC 2025 Poster (PDF)</a></li>
+        <li><a href="assets/posters/ICMISC_poster.pdf" target="_blank" rel="noopener">ICMISC Poster (PDF)</a></li>
+      </ul>
+      <p class="dim">If you don’t have posters for some papers, you can remove those links.</p>
+    </section>
+
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+
+      <div class="card">
+        <div class="titleRow">
+          <div>
+            <div style="font-weight:700">Project Associate — IIT Madras (NIID Lab)</div>
+            <div class="meta">Computational Pathology • Sepsis Prediction</div>
+          </div>
+          <div class="meta">Oct 2024 – Jun 2025</div>
+        </div>
+        <ul class="bullets">
+          <li>Worked on renal cell carcinoma image analysis using graph-theoretic and fractal/multifractal features.</li>
+          <li>Contributed to ML pipeline development for early sepsis prediction for a handheld diagnostic device.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="titleRow">
+          <div>
+            <div style="font-weight:700">Internships / Training (edit titles)</div>
+            <div class="meta">PCB / VLSI / Testing exposure</div>
+          </div>
+          <div class="meta">2022 – 2023</div>
+        </div>
+        <ul class="bullets">
+          <li>Add your Flex / NSIC bullet points here (short, results-oriented).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="pillRow">
+        <span class="pill">Python</span>
+        <span class="pill">PyTorch</span>
+        <span class="pill">NumPy</span>
+        <span class="pill">Pandas</span>
+        <span class="pill">scikit-learn</span>
+        <span class="pill">OpenCV</span>
+        <span class="pill">Medical Imaging</span>
+        <span class="pill">3D Segmentation</span>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> Abinaya Srinivasan • Built on GitHub Pages
+    </div>
+  </main>
 
   <script>
+    // ---- Footer year ----
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ---- Neural-ish sphere canvas ----
+    const canvas = document.getElementById("nnCanvas");
+    const ctx = canvas.getContext("2d", { alpha: true });
+
+    function resizeCanvas(){
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0); // draw in CSS pixels
+    }
+
+    let W=0,H=0, cx=0, cy=0;
+    const N = 220;              // nodes
+    const LINK_DIST = 82;       // draw links within this (screen space)
+    const REPULSE_R = 90;       // cursor influence radius
+    const REPULSE_S = 1.6;      // cursor strength
+    const ROT_S = 0.0014;       // base rotation speed
+
+    // 3D points on a sphere
+    const pts = [];
+    function randOnSphere(){
+      const u = Math.random()*2-1;
+      const t = Math.random()*Math.PI*2;
+      const s = Math.sqrt(1-u*u);
+      return { x: s*Math.cos(t), y: u, z: s*Math.sin(t) };
+    }
+    for(let i=0;i<N;i++){
+      const p = randOnSphere();
+      pts.push({
+        x:p.x, y:p.y, z:p.z,
+        vx:0, vy:0, vz:0
+      });
+    }
+
+    let mouse = { x: -9999, y: -9999, inside:false };
+
+    canvas.addEventListener("mousemove", (e)=>{
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left;
+      mouse.y = e.clientY - r.top;
+      mouse.inside = true;
+    });
+    canvas.addEventListener("mouseleave", ()=>{
+      mouse.inside = false;
+      mouse.x = -9999; mouse.y = -9999;
+    });
+
+    function project(p){
+      // sphere radius in pixels
+      const R = Math.min(W,H)*0.34;
+      // gentle perspective
+      const z = p.z + 2.2;
+      const k = 1 / z;
+      return {
+        sx: cx + p.x * R * k,
+        sy: cy + p.y * R * k,
+        sz: z,
+        k
+      };
+    }
+
+    function rotateY(p, a){
+      const c=Math.cos(a), s=Math.sin(a);
+      const x=p.x*c + p.z*s;
+      const z=-p.x*s + p.z*c;
+      p.x=x; p.z=z;
+    }
+    function rotateX(p, a){
+      const c=Math.cos(a), s=Math.sin(a);
+      const y=p.y*c - p.z*s;
+      const z=p.y*s + p.z*c;
+      p.y=y; p.z=z;
+    }
+
+    function tick(){
+      W = canvas.getBoundingClientRect().width;
+      H = canvas.getBoundingClientRect().height;
+      cx = W/2; cy = H/2;
+
+      ctx.clearRect(0,0,W,H);
+
+      // rotate a bit each frame
+      const aY = ROT_S * (mouse.inside ? 1.7 : 1.0);
+      const aX = ROT_S * 0.9;
+      for(const p of pts){
+        rotateY(p, aY);
+        rotateX(p, aX);
+      }
+
+      // project to screen + sort by depth
+      const proj = pts.map(p => ({ p, ...project(p) }))
+                      .sort((a,b)=> b.sz - a.sz);
+
+      // cursor repulsion in screen space mapped back to velocity
+      for(const q of proj){
+        const dx = q.sx - mouse.x;
+        const dy = q.sy - mouse.y;
+        const d = Math.hypot(dx,dy);
+        if(d < REPULSE_R){
+          const f = (1 - d/REPULSE_R) * REPULSE_S;
+          // approximate: push along screen direction => modify x,y in 3D
+          q.p.vx += (dx/(d+0.001)) * 0.0022 * f;
+          q.p.vy += (dy/(d+0.001)) * 0.0022 * f;
+        }
+      }
+
+      // integrate velocities (soft spring back)
+      for(const p of pts){
+        p.x += p.vx; p.y += p.vy; p.z += p.vz;
+        // normalize back toward unit sphere (keeps “sphere” shape)
+        const len = Math.hypot(p.x,p.y,p.z) || 1;
+        const target = 1;
+        const pull = 0.012;
+        p.x += (p.x/len*target - p.x) * pull;
+        p.y += (p.y/len*target - p.y) * pull;
+        p.z += (p.z/len*target - p.z) * pull;
+
+        // damping
+        p.vx *= 0.92; p.vy *= 0.92; p.vz *= 0.92;
+      }
+
+      // draw links (use projected positions)
+      ctx.lineWidth = 1;
+      for(let i=0;i<proj.length;i++){
+        for(let j=i+1;j<proj.length;j++){
+          const a=proj[i], b=proj[j];
+          const dx=a.sx-b.sx, dy=a.sy-b.sy;
+          const d2 = dx*dx + dy*dy;
+          if(d2 < LINK_DIST*LINK_DIST){
+            const d = Math.sqrt(d2);
+            const alpha = (1 - d/LINK_DIST) * 0.35 * Math.min(a.k,b.k);
+            ctx.strokeStyle = `rgba(96,165,250,${alpha})`;
+            ctx.beginPath();
+            ctx.moveTo(a.sx, a.sy);
+            ctx.lineTo(b.sx, b.sy);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // draw nodes
+      for(const q of proj){
+        const r = 2.2 + 2.2*q.k; // nearer = larger
+        const glow = 0.25 + 0.4*q.k;
+        ctx.fillStyle = `rgba(229,231,235,${0.75*q.k})`;
+        ctx.beginPath();
+        ctx.arc(q.sx, q.sy, r, 0, Math.PI*2);
+        ctx.fill();
+
+        // subtle glow
+        ctx.fillStyle = `rgba(96,165,250,${glow})`;
+        ctx.beginPath();
+        ctx.arc(q.sx, q.sy, r*1.8, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    requestAnimationFrame(tick);
   </script>
 </body>
 </html>
