@@ -10,19 +10,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #F1F3F6;
-    --bg-soft: #FAFBFC;
-    --panel: rgba(255, 255, 255, 0.78);
+    --bg: #EDF2F4;
+    --bg-soft: #FFFFFF;
+    --panel: rgba(255, 255, 255, 0.82);
     --panel-solid: #FFFFFF;
-    --border: rgba(15, 23, 42, 0.09);
-    --border-strong: rgba(13, 148, 136, 0.4);
-    --text: #14171D;
-    --muted: #5B6472;
-    --muted-dim: #98A2B3;
-    --accent: #0D9488;
-    --accent-soft: rgba(13, 148, 136, 0.10);
-    --accent2: #E2542F;
-    --accent2-soft: rgba(226, 84, 47, 0.10);
+    --border: rgba(43, 45, 66, 0.12);
+    --border-strong: rgba(239, 35, 60, 0.45);
+    --text: #2B2D42;
+    --muted: #5C6478;
+    --muted-dim: #8D99AE;
+    --accent: #EF233C;
+    --accent-soft: rgba(239, 35, 60, 0.10);
+    --accent2: #2B2D42;
+    --accent2-soft: rgba(43, 45, 66, 0.08);
+    --accent3: #D80032;
     --radius: 6px;
     --maxw: 1080px;
   }
@@ -57,7 +58,7 @@
     z-index: 0;
     background-color: var(--bg);
     background-image:
-      radial-gradient(rgba(20,23,29,0.08) 1px, transparent 1px);
+      radial-gradient(rgba(43,45,66,0.13) 1.2px, transparent 1.2px);
     background-size: 28px 28px;
   }
 
@@ -69,8 +70,8 @@
     z-index: 0;
     pointer-events: none;
     background: radial-gradient(
-      480px circle at var(--sx, 50%) var(--sy, 20%),
-      rgba(13, 148, 136, 0.09),
+      560px circle at var(--sx, 50%) var(--sy, 20%),
+      rgba(239, 35, 60, 0.13),
       transparent 70%
     );
     transition: background-position 0.2s ease;
@@ -94,19 +95,19 @@
   #bg-blobs span:nth-child(1){
     width: 480px; height: 480px;
     top: -120px; left: -100px;
-    background: #0D9488;
+    background: #EF233C;
     animation: drift-a 46s ease-in-out infinite;
   }
   #bg-blobs span:nth-child(2){
     width: 420px; height: 420px;
     bottom: -140px; right: -80px;
-    background: #E2542F;
+    background: #2B2D42;
     animation: drift-b 52s ease-in-out infinite;
   }
   #bg-blobs span:nth-child(3){
     width: 380px; height: 380px;
     top: 40%; right: 15%;
-    background: #0D9488;
+    background: #D80032;
     opacity: 0.10;
     animation: drift-c 60s ease-in-out infinite;
   }
@@ -194,20 +195,27 @@
   .eyebrow{
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
-    color: var(--accent);
+    color: var(--text);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 18px;
+    font-weight: 500;
   }
-  .eyebrow::before{
-    content: '';
-    width: 18px;
-    height: 1px;
+  .eyebrow-num{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 4px;
     background: var(--accent);
-    display: inline-block;
+    color: #ffffff;
+    font-size: 11px;
+    letter-spacing: 0;
   }
 
   .section-title{
@@ -245,7 +253,7 @@
     position: absolute;
     left: 0; right: 0;
     height: 140px;
-    background: linear-gradient(to bottom, transparent, rgba(13,148,136,0.07), transparent);
+    background: linear-gradient(to bottom, transparent, rgba(239,35,60,0.09), transparent);
     animation: scan-sweep 11s ease-in-out infinite;
   }
   @keyframes scan-sweep{
@@ -259,7 +267,7 @@
     z-index: 1;
     width: 200px;
     margin-bottom: 28px;
-    filter: drop-shadow(0 18px 26px rgba(20,23,29,0.18));
+    filter: drop-shadow(0 18px 26px rgba(43,45,66,0.20));
     animation: float 6s ease-in-out infinite;
   }
   @keyframes float{
@@ -319,7 +327,7 @@
     border-color: var(--accent);
     font-weight: 500;
   }
-  .btn-primary:hover{ background: #0b7d72; transform: translateY(-1px); }
+  .btn-primary:hover{ background: #c81f34; transform: translateY(-1px); }
   .btn-ghost{
     color: var(--text);
     background: var(--panel);
@@ -486,7 +494,7 @@
   }
   .pub-item:hover .pub-thumb{
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(20,23,29,0.12);
+    box-shadow: 0 10px 20px rgba(43,45,66,0.14);
   }
   .pub-thumb svg{ display: block; width: 100%; height: 100%; }
 
@@ -631,7 +639,6 @@
     padding: 100px clamp(20px,5vw,40px) 60px;
   }
   .contact-wrap .eyebrow{ justify-content: center; }
-  .contact-wrap .eyebrow::before{ display: none; }
   .contact-title{
     font-size: clamp(32px, 6vw, 56px);
     margin-bottom: 20px;
@@ -673,41 +680,46 @@
 <div id="bg-motifs" aria-hidden="true">
   <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
     <!-- scan rings -->
-    <g stroke="#0D9488" fill="none" opacity="0.10">
+    <g stroke="#EF233C" fill="none" opacity="0.20">
       <circle cx="1240" cy="160" r="60"></circle>
       <circle cx="1240" cy="160" r="105"></circle>
       <circle cx="1240" cy="160" r="150"></circle>
     </g>
     <!-- vessel branch network, top right -->
-    <g stroke="#0D9488" stroke-width="2" fill="none" opacity="0.11" stroke-linecap="round">
+    <g stroke="#EF233C" stroke-width="2.2" fill="none" opacity="0.20" stroke-linecap="round">
       <path d="M 1420 30 C 1360 80, 1320 60, 1280 120 C 1250 165, 1270 190, 1230 240"></path>
       <path d="M 1280 120 C 1250 140, 1210 130, 1180 180"></path>
       <path d="M 1230 240 C 1200 280, 1210 320, 1170 360"></path>
       <path d="M 1230 240 C 1260 270, 1300 270, 1330 310"></path>
     </g>
     <!-- second, smaller vessel cluster lower-left -->
-    <g stroke="#0D9488" stroke-width="1.6" fill="none" opacity="0.09" stroke-linecap="round">
+    <g stroke="#EF233C" stroke-width="1.8" fill="none" opacity="0.16" stroke-linecap="round">
       <path d="M -20 760 C 40 720, 70 740, 120 700 C 160 668, 150 630, 200 600"></path>
       <path d="M 120 700 C 150 690, 180 705, 210 680"></path>
       <path d="M 200 600 C 230 580, 225 550, 260 525"></path>
     </g>
     <!-- detection bounding box, lower left -->
-    <g opacity="0.30">
-      <rect x="60" y="640" width="210" height="150" fill="none" stroke="#E2542F" stroke-width="1.4" stroke-dasharray="5 5"></rect>
-      <path d="M 52 640 v -14 h 14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-      <path d="M 278 640 v -14 h -14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-      <path d="M 52 790 v 14 h 14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-      <path d="M 278 790 v 14 h -14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-      <text x="60" y="630" font-family="JetBrains Mono, monospace" font-size="12" fill="#E2542F">ROI · 0.91</text>
+    <g opacity="0.5">
+      <rect x="60" y="640" width="210" height="150" fill="none" stroke="#2B2D42" stroke-width="1.6" stroke-dasharray="5 5"></rect>
+      <path d="M 52 640 v -14 h 14" stroke="#2B2D42" stroke-width="2.2" fill="none"></path>
+      <path d="M 278 640 v -14 h -14" stroke="#2B2D42" stroke-width="2.2" fill="none"></path>
+      <path d="M 52 790 v 14 h 14" stroke="#2B2D42" stroke-width="2.2" fill="none"></path>
+      <path d="M 278 790 v 14 h -14" stroke="#2B2D42" stroke-width="2.2" fill="none"></path>
+      <text x="60" y="630" font-family="JetBrains Mono, monospace" font-size="12" fill="#2B2D42">ROI · 0.91</text>
     </g>
     <!-- second bounding box, mid right, smaller -->
-    <g opacity="0.22">
-      <rect x="1120" y="560" width="150" height="110" fill="none" stroke="#0D9488" stroke-width="1.2" stroke-dasharray="4 4"></rect>
-      <path d="M 1112 560 v -12 h 12" stroke="#0D9488" stroke-width="1.6" fill="none"></path>
-      <path d="M 1278 560 v -12 h -12" stroke="#0D9488" stroke-width="1.6" fill="none"></path>
+    <g opacity="0.32">
+      <rect x="1120" y="560" width="150" height="110" fill="none" stroke="#EF233C" stroke-width="1.4" stroke-dasharray="4 4"></rect>
+      <path d="M 1112 560 v -12 h 12" stroke="#EF233C" stroke-width="1.8" fill="none"></path>
+      <path d="M 1278 560 v -12 h -12" stroke="#EF233C" stroke-width="1.8" fill="none"></path>
+    </g>
+    <!-- third bounding box, upper-left, small -->
+    <g opacity="0.26">
+      <rect x="260" y="70" width="120" height="90" fill="none" stroke="#D80032" stroke-width="1.3" stroke-dasharray="4 4"></rect>
+      <text x="260" y="60" font-family="JetBrains Mono, monospace" font-size="11" fill="#D80032">TISSUE · 0.88</text>
     </g>
     <!-- CT/MRI slice grid patch -->
-    <g stroke="#14171D" stroke-width="1" opacity="0.07">
+    <g stroke="#2B2D42" stroke-width="1" opacity="0.12">
       <rect x="700" y="40" width="150" height="150" fill="none"></rect>
       <line x1="737" y1="40" x2="737" y2="190"></line>
       <line x1="775" y1="40" x2="775" y2="190"></line>
@@ -716,16 +728,26 @@
       <line x1="700" y1="115" x2="850" y2="115"></line>
       <line x1="700" y1="152" x2="850" y2="152"></line>
     </g>
-    <!-- keypoint dots scattered, like feature matches -->
-    <g fill="#E2542F" opacity="0.18">
-      <circle cx="420" cy="220" r="2.5"></circle>
-      <circle cx="470" cy="260" r="2.5"></circle>
-      <circle cx="510" cy="210" r="2.5"></circle>
-      <circle cx="900" cy="700" r="2.5"></circle>
-      <circle cx="950" cy="740" r="2.5"></circle>
-      <circle cx="1000" cy="705" r="2.5"></circle>
+    <!-- second, smaller grid patch, bottom right -->
+    <g stroke="#2B2D42" stroke-width="1" opacity="0.10">
+      <rect x="1240" y="740" width="100" height="100" fill="none"></rect>
+      <line x1="1265" y1="740" x2="1265" y2="840"></line>
+      <line x1="1290" y1="740" x2="1290" y2="840"></line>
+      <line x1="1315" y1="740" x2="1315" y2="840"></line>
+      <line x1="1240" y1="765" x2="1340" y2="765"></line>
+      <line x1="1240" y1="790" x2="1340" y2="790"></line>
+      <line x1="1240" y1="815" x2="1340" y2="815"></line>
     </g>
-    <g stroke="#E2542F" stroke-width="0.8" opacity="0.12">
+    <!-- keypoint dots scattered, like feature matches -->
+    <g fill="#D80032" opacity="0.28">
+      <circle cx="420" cy="220" r="2.8"></circle>
+      <circle cx="470" cy="260" r="2.8"></circle>
+      <circle cx="510" cy="210" r="2.8"></circle>
+      <circle cx="900" cy="700" r="2.8"></circle>
+      <circle cx="950" cy="740" r="2.8"></circle>
+      <circle cx="1000" cy="705" r="2.8"></circle>
+    </g>
+    <g stroke="#D80032" stroke-width="1" opacity="0.18">
       <line x1="420" y1="220" x2="470" y2="260"></line>
       <line x1="470" y1="260" x2="510" y2="210"></line>
       <line x1="900" y1="700" x2="950" y2="740"></line>
@@ -733,7 +755,7 @@
     </g>
     <!-- waveform / segmentation contour, bottom edge -->
     <path d="M 0 860 C 80 830, 140 880, 220 845 C 320 800, 380 870, 480 835 C 600 790, 660 860, 780 825 C 900 790, 960 855, 1080 830 C 1200 800, 1280 850, 1440 820"
-          stroke="#0D9488" stroke-width="1.4" fill="none" opacity="0.10"></path>
+          stroke="#EF233C" stroke-width="1.8" fill="none" opacity="0.18"></path>
   </svg>
 </div>
 <div id="bg-spotlight"></div>
@@ -756,7 +778,7 @@
     <div class="hero-backdrop" aria-hidden="true">
       <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
         <!-- scan rings, centered behind the portrait -->
-        <g stroke="#0D9488" fill="none" opacity="0.16">
+        <g stroke="#EF233C" fill="none" opacity="0.22">
           <circle cx="950" cy="300" r="70"></circle>
           <circle cx="950" cy="300" r="120"></circle>
           <circle cx="950" cy="300" r="170"></circle>
@@ -779,7 +801,7 @@
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="eyebrow">// about</div>
+    <div class="eyebrow"><span class="eyebrow-num">01</span> About</div>
     <h2 class="section-title">Vision systems that<br>hold up under scrutiny.</h2>
     <div class="about-grid">
       <div class="about-text">
@@ -800,7 +822,7 @@
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="eyebrow">// experience</div>
+    <div class="eyebrow"><span class="eyebrow-num">02</span> Experience</div>
     <h2 class="section-title">Research experience</h2>
 
     <div class="exp-item">
@@ -831,7 +853,7 @@
 
   <!-- PROJECTS -->
   <section id="projects">
-    <div class="eyebrow">// projects</div>
+    <div class="eyebrow"><span class="eyebrow-num">03</span> Projects</div>
     <h2 class="section-title">Selected work</h2>
     <div class="proj-grid">
 
@@ -882,14 +904,14 @@
 
   <!-- PUBLICATIONS -->
   <section id="publications">
-    <div class="eyebrow">// publications</div>
+    <div class="eyebrow"><span class="eyebrow-num">04</span> Publications</div>
     <h2 class="section-title">Publications</h2>
 
     <a class="pub-item" href="https://doi.org/10.1016/j.cmpb.2025.108930" target="_blank" rel="noopener">
       <div class="pub-thumb">
         <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#0D9488"></stop><stop offset="1" stop-color="#0b756b"></stop>
+            <stop offset="0" stop-color="#3d4060"></stop><stop offset="1" stop-color="#2B2D42"></stop>
           </linearGradient></defs>
           <rect width="96" height="72" fill="url(#g1)"></rect>
           <g stroke="#ffffff" stroke-width="1.3" opacity="0.9" fill="none">
@@ -912,7 +934,7 @@
       <div class="pub-thumb">
         <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
           <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#E2542F"></stop><stop offset="1" stop-color="#b8431f"></stop>
+            <stop offset="0" stop-color="#D80032"></stop><stop offset="1" stop-color="#9e0026"></stop>
           </linearGradient></defs>
           <rect width="96" height="72" fill="url(#g2)"></rect>
           <g stroke="#ffffff" fill="none" opacity="0.9">
@@ -933,11 +955,11 @@
       <div class="pub-thumb">
         <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
           <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#232833"></stop><stop offset="1" stop-color="#14171D"></stop>
+            <stop offset="0" stop-color="#3d4060"></stop><stop offset="1" stop-color="#2B2D42"></stop>
           </linearGradient></defs>
           <rect width="96" height="72" fill="url(#g3)"></rect>
           <path d="M0 36 L12 36 L18 20 L24 52 L30 12 L36 60 L42 36 L48 36 L54 24 L60 48 L66 36 L96 36"
-                stroke="#0D9488" stroke-width="1.4" fill="none" opacity="0.95"></path>
+                stroke="#EF233C" stroke-width="1.4" fill="none" opacity="0.95"></path>
         </svg>
       </div>
       <div class="pub-body">
@@ -950,7 +972,7 @@
       <div class="pub-thumb">
         <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
           <defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#12b3a3"></stop><stop offset="1" stop-color="#0D9488"></stop>
+            <stop offset="0" stop-color="#f4485f"></stop><stop offset="1" stop-color="#EF233C"></stop>
           </linearGradient></defs>
           <rect width="96" height="72" fill="url(#g4)"></rect>
           <g fill="none" stroke="#ffffff" opacity="0.9">
@@ -971,7 +993,7 @@
       <div class="pub-thumb">
         <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
           <defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#e8703f"></stop><stop offset="1" stop-color="#E2542F"></stop>
+            <stop offset="0" stop-color="#e6003c"></stop><stop offset="1" stop-color="#D80032"></stop>
           </linearGradient></defs>
           <rect width="96" height="72" fill="url(#g5)"></rect>
           <g fill="none" stroke="#ffffff" opacity="0.9">
@@ -996,7 +1018,7 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <div class="eyebrow">// skills</div>
+    <div class="eyebrow"><span class="eyebrow-num">05</span> Skills</div>
     <h2 class="section-title">Toolkit</h2>
 
     <div class="marquee-row speed-1">
@@ -1021,7 +1043,7 @@
 
   <!-- EDUCATION -->
   <section id="education">
-    <div class="eyebrow">// education</div>
+    <div class="eyebrow"><span class="eyebrow-num">06</span> Education</div>
     <h2 class="section-title">Education</h2>
     <div class="split-grid">
       <div class="edu-card">
@@ -1041,7 +1063,7 @@
 
   <!-- CONTACT -->
   <section id="contact" class="contact-wrap">
-    <div class="eyebrow">// contact</div>
+    <div class="eyebrow"><span class="eyebrow-num">07</span> Contact</div>
     <h2 class="contact-title">Let's talk <span>imaging.</span></h2>
     <p class="contact-sub">Open to research collaborations, PhD opportunities, and roles in medical imaging or applied deep learning.</p>
     <div class="contact-links">
