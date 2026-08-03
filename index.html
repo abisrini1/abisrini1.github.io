@@ -76,6 +76,68 @@
     transition: background-position 0.2s ease;
   }
 
+  #bg-blobs{
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    filter: blur(60px);
+  }
+  #bg-blobs span{
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.16;
+  }
+  #bg-blobs span:nth-child(1){
+    width: 480px; height: 480px;
+    top: -120px; left: -100px;
+    background: #0D9488;
+    animation: drift-a 46s ease-in-out infinite;
+  }
+  #bg-blobs span:nth-child(2){
+    width: 420px; height: 420px;
+    bottom: -140px; right: -80px;
+    background: #E2542F;
+    animation: drift-b 52s ease-in-out infinite;
+  }
+  #bg-blobs span:nth-child(3){
+    width: 380px; height: 380px;
+    top: 40%; right: 15%;
+    background: #0D9488;
+    opacity: 0.10;
+    animation: drift-c 60s ease-in-out infinite;
+  }
+  @keyframes drift-a{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(120px, 90px) scale(1.15); }
+  }
+  @keyframes drift-b{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-100px, -70px) scale(1.1); }
+  }
+  @keyframes drift-c{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-80px, 100px) scale(0.9); }
+  }
+
+  #bg-motifs{
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  #bg-motifs svg{ position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  @media (prefers-reduced-motion: reduce){
+    #bg-blobs span{ animation: none !important; }
+  }
+
   .content{ position: relative; z-index: 1; }
 
   /* ---------- NAV ---------- */
@@ -405,16 +467,31 @@
 
   /* ---------- PUBLICATIONS ---------- */
   .pub-item{
-    padding: 18px 0;
+    padding: 20px 0;
     border-top: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     gap: 20px;
-    align-items: baseline;
-    flex-wrap: wrap;
   }
   .pub-item:last-child{ border-bottom: 1px solid var(--border); }
-  .pub-title{ font-size: 15px; color: var(--text); max-width: 620px; }
+
+  .pub-thumb{
+    flex: none;
+    width: 96px;
+    height: 72px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .pub-item:hover .pub-thumb{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(20,23,29,0.12);
+  }
+  .pub-thumb svg{ display: block; width: 100%; height: 100%; }
+
+  .pub-body{ flex: 1; min-width: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .pub-title{ font-size: 15px; color: var(--text); max-width: 560px; }
   .pub-meta{
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -429,6 +506,12 @@
     border-bottom: 1px solid transparent;
   }
   .pub-link:hover{ border-color: var(--accent); }
+
+  @media (max-width: 560px){
+    .pub-item{ align-items: flex-start; }
+    .pub-thumb{ width: 72px; height: 54px; }
+  }
+
   .award-badge{
     margin-top: 24px;
     display: flex;
@@ -586,6 +669,73 @@
 <body>
 
 <div id="bg-layer"></div>
+<div id="bg-blobs"><span></span><span></span><span></span></div>
+<div id="bg-motifs" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <!-- scan rings -->
+    <g stroke="#0D9488" fill="none" opacity="0.10">
+      <circle cx="1240" cy="160" r="60"></circle>
+      <circle cx="1240" cy="160" r="105"></circle>
+      <circle cx="1240" cy="160" r="150"></circle>
+    </g>
+    <!-- vessel branch network, top right -->
+    <g stroke="#0D9488" stroke-width="2" fill="none" opacity="0.11" stroke-linecap="round">
+      <path d="M 1420 30 C 1360 80, 1320 60, 1280 120 C 1250 165, 1270 190, 1230 240"></path>
+      <path d="M 1280 120 C 1250 140, 1210 130, 1180 180"></path>
+      <path d="M 1230 240 C 1200 280, 1210 320, 1170 360"></path>
+      <path d="M 1230 240 C 1260 270, 1300 270, 1330 310"></path>
+    </g>
+    <!-- second, smaller vessel cluster lower-left -->
+    <g stroke="#0D9488" stroke-width="1.6" fill="none" opacity="0.09" stroke-linecap="round">
+      <path d="M -20 760 C 40 720, 70 740, 120 700 C 160 668, 150 630, 200 600"></path>
+      <path d="M 120 700 C 150 690, 180 705, 210 680"></path>
+      <path d="M 200 600 C 230 580, 225 550, 260 525"></path>
+    </g>
+    <!-- detection bounding box, lower left -->
+    <g opacity="0.30">
+      <rect x="60" y="640" width="210" height="150" fill="none" stroke="#E2542F" stroke-width="1.4" stroke-dasharray="5 5"></rect>
+      <path d="M 52 640 v -14 h 14" stroke="#E2542F" stroke-width="2" fill="none"></path>
+      <path d="M 278 640 v -14 h -14" stroke="#E2542F" stroke-width="2" fill="none"></path>
+      <path d="M 52 790 v 14 h 14" stroke="#E2542F" stroke-width="2" fill="none"></path>
+      <path d="M 278 790 v 14 h -14" stroke="#E2542F" stroke-width="2" fill="none"></path>
+      <text x="60" y="630" font-family="JetBrains Mono, monospace" font-size="12" fill="#E2542F">ROI · 0.91</text>
+    </g>
+    <!-- second bounding box, mid right, smaller -->
+    <g opacity="0.22">
+      <rect x="1120" y="560" width="150" height="110" fill="none" stroke="#0D9488" stroke-width="1.2" stroke-dasharray="4 4"></rect>
+      <path d="M 1112 560 v -12 h 12" stroke="#0D9488" stroke-width="1.6" fill="none"></path>
+      <path d="M 1278 560 v -12 h -12" stroke="#0D9488" stroke-width="1.6" fill="none"></path>
+    </g>
+    <!-- CT/MRI slice grid patch -->
+    <g stroke="#14171D" stroke-width="1" opacity="0.07">
+      <rect x="700" y="40" width="150" height="150" fill="none"></rect>
+      <line x1="737" y1="40" x2="737" y2="190"></line>
+      <line x1="775" y1="40" x2="775" y2="190"></line>
+      <line x1="812" y1="40" x2="812" y2="190"></line>
+      <line x1="700" y1="77" x2="850" y2="77"></line>
+      <line x1="700" y1="115" x2="850" y2="115"></line>
+      <line x1="700" y1="152" x2="850" y2="152"></line>
+    </g>
+    <!-- keypoint dots scattered, like feature matches -->
+    <g fill="#E2542F" opacity="0.18">
+      <circle cx="420" cy="220" r="2.5"></circle>
+      <circle cx="470" cy="260" r="2.5"></circle>
+      <circle cx="510" cy="210" r="2.5"></circle>
+      <circle cx="900" cy="700" r="2.5"></circle>
+      <circle cx="950" cy="740" r="2.5"></circle>
+      <circle cx="1000" cy="705" r="2.5"></circle>
+    </g>
+    <g stroke="#E2542F" stroke-width="0.8" opacity="0.12">
+      <line x1="420" y1="220" x2="470" y2="260"></line>
+      <line x1="470" y1="260" x2="510" y2="210"></line>
+      <line x1="900" y1="700" x2="950" y2="740"></line>
+      <line x1="950" y1="740" x2="1000" y2="705"></line>
+    </g>
+    <!-- waveform / segmentation contour, bottom edge -->
+    <path d="M 0 860 C 80 830, 140 880, 220 845 C 320 800, 380 870, 480 835 C 600 790, 660 860, 780 825 C 900 790, 960 855, 1080 830 C 1200 800, 1280 850, 1440 820"
+          stroke="#0D9488" stroke-width="1.4" fill="none" opacity="0.10"></path>
+  </svg>
+</div>
 <div id="bg-spotlight"></div>
 
 <div class="content">
@@ -606,47 +756,12 @@
     <div class="hero-backdrop" aria-hidden="true">
       <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
         <!-- scan rings, centered behind the portrait -->
-        <g stroke="#0D9488" fill="none" opacity="0.14">
+        <g stroke="#0D9488" fill="none" opacity="0.16">
           <circle cx="950" cy="300" r="70"></circle>
           <circle cx="950" cy="300" r="120"></circle>
           <circle cx="950" cy="300" r="170"></circle>
           <circle cx="950" cy="300" r="220"></circle>
         </g>
-
-        <!-- branching vessel network, top right -->
-        <g stroke="#0D9488" stroke-width="2" fill="none" opacity="0.16" stroke-linecap="round">
-          <path d="M 1180 40 C 1120 90, 1080 70, 1040 130 C 1010 175, 1030 200, 990 250"></path>
-          <path d="M 1040 130 C 1010 150, 970 140, 940 190"></path>
-          <path d="M 990 250 C 960 290, 970 330, 930 370"></path>
-          <path d="M 930 370 C 900 400, 910 440, 870 470"></path>
-          <path d="M 990 250 C 1020 280, 1060 280, 1090 320"></path>
-          <path d="M 1180 40 C 1160 10, 1120 20, 1090 -10"></path>
-        </g>
-
-        <!-- detection bounding box motif, lower left -->
-        <g opacity="0.5">
-          <rect x="70" y="520" width="230" height="160" fill="none" stroke="#E2542F" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.35"></rect>
-          <path d="M 62 520 v -14 h 14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-          <path d="M 308 520 v -14 h -14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-          <path d="M 62 680 v 14 h 14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-          <path d="M 308 680 v 14 h -14" stroke="#E2542F" stroke-width="2" fill="none"></path>
-          <text x="70" y="510" font-family="JetBrains Mono, monospace" font-size="13" fill="#E2542F" opacity="0.6">LESION · 0.94</text>
-        </g>
-
-        <!-- CT/MRI slice grid patch, bottom left -->
-        <g stroke="#14171D" stroke-width="1" opacity="0.08">
-          <rect x="40" y="40" width="160" height="160" fill="none"></rect>
-          <line x1="80" y1="40" x2="80" y2="200"></line>
-          <line x1="120" y1="40" x2="120" y2="200"></line>
-          <line x1="160" y1="40" x2="160" y2="200"></line>
-          <line x1="40" y1="80" x2="200" y2="80"></line>
-          <line x1="40" y1="120" x2="200" y2="120"></line>
-          <line x1="40" y1="160" x2="200" y2="160"></line>
-        </g>
-
-        <!-- waveform / segmentation contour, bottom edge -->
-        <path d="M 0 760 C 60 740, 100 780, 160 750 C 220 720, 260 770, 320 745 C 400 710, 440 780, 520 755 C 610 725, 660 760, 740 740 C 820 715, 880 770, 960 750 C 1040 725, 1100 760, 1200 745"
-              stroke="#0D9488" stroke-width="1.5" fill="none" opacity="0.14"></path>
       </svg>
       <div class="scanline"></div>
     </div>
@@ -679,7 +794,6 @@
         <div class="fact-row"><span class="fact-k">CURRENT</span><span class="fact-v">M.S.E., Johns Hopkins</span></div>
         <div class="fact-row"><span class="fact-k">TOOLS</span><span class="fact-v">PyTorch · OpenCV · MONAI</span></div>
         <div class="fact-row"><span class="fact-k">EMAIL</span><span class="fact-v">abinaya2srinivasan@gmail.com</span></div>
-        <div class="fact-row"><span class="fact-k">PHONE</span><span class="fact-v">+1 346 820 4965</span></div>
       </div>
     </div>
   </section>
@@ -771,26 +885,108 @@
     <div class="eyebrow">// publications</div>
     <h2 class="section-title">Publications</h2>
 
-    <div class="pub-item">
-      <div class="pub-title">Graph-theoretic characterization of nuclear spatial organization in RCC images</div>
-      <div class="pub-meta">CMPB · 2025 <a class="pub-link" href="https://doi.org/10.1016/j.cmpb.2025.108930" target="_blank" rel="noopener">↗</a></div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-title">Multifractal analysis of H&amp;E stained nuclear images for RCC classification</div>
-      <div class="pub-meta">EMBC · 2025 <a class="pub-link" href="https://pubmed.ncbi.nlm.nih.gov/41337374/" target="_blank" rel="noopener">↗</a></div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-title">Glitch waveform classification using Swin Transformer on LIGO data</div>
-      <div class="pub-meta">ICMISC · 2024 <a class="pub-link" href="https://link.springer.com/chapter/10.1007/978-981-97-8865-1_28" target="_blank" rel="noopener">↗</a></div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-title">GAN-based segmentation with deep learning classifiers for leukemia detection</div>
-      <div class="pub-meta">ICBSII · 2024 <a class="pub-link" href="https://ieeexplore.ieee.org/document/10564063" target="_blank" rel="noopener">↗</a></div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-title">GAN-based segmentation model for acute lymphoblastic leukemia detection</div>
-      <div class="pub-meta">AIIII · 2024 <a class="pub-link" href="https://www.researchgate.net/publication/399887040_Generative_Adversarial_Networks_Based_Segmentation_Model_for_Acute_Lymphoblastic_Leukemia_Detection" target="_blank" rel="noopener">↗</a></div>
-    </div>
+    <a class="pub-item" href="https://doi.org/10.1016/j.cmpb.2025.108930" target="_blank" rel="noopener">
+      <div class="pub-thumb">
+        <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0D9488"></stop><stop offset="1" stop-color="#0b756b"></stop>
+          </linearGradient></defs>
+          <rect width="96" height="72" fill="url(#g1)"></rect>
+          <g stroke="#ffffff" stroke-width="1.3" opacity="0.9" fill="none">
+            <circle cx="30" cy="24" r="3" fill="#ffffff" stroke="none"></circle>
+            <circle cx="58" cy="18" r="3" fill="#ffffff" stroke="none"></circle>
+            <circle cx="66" cy="42" r="3" fill="#ffffff" stroke="none"></circle>
+            <circle cx="38" cy="50" r="3" fill="#ffffff" stroke="none"></circle>
+            <circle cx="18" cy="46" r="3" fill="#ffffff" stroke="none"></circle>
+            <path d="M30 24 L58 18 M58 18 L66 42 M66 42 L38 50 M38 50 L18 46 M18 46 L30 24 M30 24 L38 50"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="pub-body">
+        <div class="pub-title">Graph-theoretic characterization of nuclear spatial organization in RCC images</div>
+        <div class="pub-meta">CMPB · 2025 <span class="pub-link">↗</span></div>
+      </div>
+    </a>
+
+    <a class="pub-item" href="https://pubmed.ncbi.nlm.nih.gov/41337374/" target="_blank" rel="noopener">
+      <div class="pub-thumb">
+        <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E2542F"></stop><stop offset="1" stop-color="#b8431f"></stop>
+          </linearGradient></defs>
+          <rect width="96" height="72" fill="url(#g2)"></rect>
+          <g stroke="#ffffff" fill="none" opacity="0.9">
+            <circle cx="48" cy="36" r="9" stroke-width="1.2"></circle>
+            <circle cx="48" cy="36" r="16" stroke-width="1.2"></circle>
+            <circle cx="48" cy="36" r="23" stroke-width="1.2"></circle>
+            <circle cx="48" cy="36" r="2" fill="#ffffff" stroke="none"></circle>
+          </g>
+        </svg>
+      </div>
+      <div class="pub-body">
+        <div class="pub-title">Multifractal analysis of H&amp;E stained nuclear images for RCC classification</div>
+        <div class="pub-meta">EMBC · 2025 <span class="pub-link">↗</span></div>
+      </div>
+    </a>
+
+    <a class="pub-item" href="https://link.springer.com/chapter/10.1007/978-981-97-8865-1_28" target="_blank" rel="noopener">
+      <div class="pub-thumb">
+        <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#232833"></stop><stop offset="1" stop-color="#14171D"></stop>
+          </linearGradient></defs>
+          <rect width="96" height="72" fill="url(#g3)"></rect>
+          <path d="M0 36 L12 36 L18 20 L24 52 L30 12 L36 60 L42 36 L48 36 L54 24 L60 48 L66 36 L96 36"
+                stroke="#0D9488" stroke-width="1.4" fill="none" opacity="0.95"></path>
+        </svg>
+      </div>
+      <div class="pub-body">
+        <div class="pub-title">Glitch waveform classification using Swin Transformer on LIGO data</div>
+        <div class="pub-meta">ICMISC · 2024 <span class="pub-link">↗</span></div>
+      </div>
+    </a>
+
+    <a class="pub-item" href="https://ieeexplore.ieee.org/document/10564063" target="_blank" rel="noopener">
+      <div class="pub-thumb">
+        <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#12b3a3"></stop><stop offset="1" stop-color="#0D9488"></stop>
+          </linearGradient></defs>
+          <rect width="96" height="72" fill="url(#g4)"></rect>
+          <g fill="none" stroke="#ffffff" opacity="0.9">
+            <rect x="14" y="22" width="24" height="28" rx="4" stroke-width="1.3"></rect>
+            <rect x="58" y="22" width="24" height="28" rx="4" stroke-width="1.3" stroke-dasharray="3 2.5"></rect>
+            <path d="M40 36 L56 36" stroke-width="1.4"></path>
+            <path d="M50 31 L56 36 L50 41" stroke-width="1.4"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="pub-body">
+        <div class="pub-title">GAN-based segmentation with deep learning classifiers for leukemia detection</div>
+        <div class="pub-meta">ICBSII · 2024 <span class="pub-link">↗</span></div>
+      </div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/399887040_Generative_Adversarial_Networks_Based_Segmentation_Model_for_Acute_Lymphoblastic_Leukemia_Detection" target="_blank" rel="noopener">
+      <div class="pub-thumb">
+        <svg viewBox="0 0 96 72" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#e8703f"></stop><stop offset="1" stop-color="#E2542F"></stop>
+          </linearGradient></defs>
+          <rect width="96" height="72" fill="url(#g5)"></rect>
+          <g fill="none" stroke="#ffffff" opacity="0.9">
+            <rect x="14" y="22" width="24" height="28" rx="4" stroke-width="1.3"></rect>
+            <rect x="58" y="22" width="24" height="28" rx="4" stroke-width="1.3" stroke-dasharray="3 2.5"></rect>
+            <path d="M40 36 L56 36" stroke-width="1.4"></path>
+            <path d="M50 31 L56 36 L50 41" stroke-width="1.4"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="pub-body">
+        <div class="pub-title">GAN-based segmentation model for acute lymphoblastic leukemia detection</div>
+        <div class="pub-meta">AIIII · 2024 <span class="pub-link">↗</span></div>
+      </div>
+    </a>
 
     <div class="award-badge">
       <span class="ico">★</span>
@@ -851,7 +1047,6 @@
     <div class="contact-links">
       <a class="btn btn-primary" href="mailto:abinaya2srinivasan@gmail.com">abinaya2srinivasan@gmail.com</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/abinaya-srinivasan-692451283/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" href="tel:+13468204965">+1 346 820 4965</a>
     </div>
   </section>
 
