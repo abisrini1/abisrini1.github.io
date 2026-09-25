@@ -639,6 +639,29 @@
     left: 0;
     color: var(--accent);
   }
+  .exp-tag-live{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--border-strong);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.exp-tag-live .dot{
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
 
   /* ---------- PROJECTS ---------- */
   .proj-grid{
@@ -1179,6 +1202,18 @@
   <section id="experience">
     <div class="eyebrow"><span class="eyebrow-num">02</span> Experience</div>
     <h2 class="section-title">Research experience</h2>
+
+    <div class="exp-item">
+      <div class="exp-date mono">JUN 2026 — PRESENT<span class="exp-tag-live"><span class="dot"></span>current</span></div>
+      <div>
+        <div class="exp-role">Graduate Researcher</div>
+        <div class="exp-org">ARCADE Lab, Johns Hopkins University · Advisor: Prof. Mathias Unberath</div>
+        <ul class="exp-list">
+          <li>Extending an action-conditioned world model that predicts fluoroscopic video from robot joint-angle commands during robot-assisted vertebroplasty, aiming to reduce reliance on intraoperative X-ray.</li>
+          <li>Diagnosing and closing the sim-to-real gap: the model performs well in simulation but loses accuracy on real cadaveric data, so current work focuses on improving its real-world performance and reliability.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="exp-item">
       <div class="exp-date mono">JAN 2026 — MAY 2026</div>
